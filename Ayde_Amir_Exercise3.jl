@@ -29,3 +29,13 @@ function separate_var(filename)                     #creates function
     println("Reset with git reset --mixed")         #after reset of bug
     return red, green, blue                         #returns the red, green and blue channel
 end
+##Part Ae
+image2 = zeros(360,640,3)                           #creates a 360x640x3 matrix
+red, green, blue = separate_var("el-capitan.png")   #loads the red, green, and blue channels from original image
+image2[:,:,1] = green;    #loads the green channel into 1st matrix of image
+image2[:,:, 2] = blue;    #loads blue channel into second
+image2[:, :, 3] = red;    #loads red channel into third
+
+figure(1); clf();                                               #opens and clears figure
+subplot(1,2,1); imshow(img); title("Original");axis("off")     #creates a side by side plot of orginal and new image
+subplot(1,2,2); imshow(image2); title("Image2"):axis("off")
