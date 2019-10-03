@@ -13,6 +13,8 @@ the image file, displays it, and extracts
 the red, blue, and green channels into
 separate variables, and returns those variables
 
+Requires PyPlot to be loaded!!!
+
 Args:
    filename (str): string representing filename; ex: "selfie.png"
 Returns:
@@ -39,3 +41,31 @@ image2[:, :, 3] = red;    #loads red channel into third
 figure(1); clf();                                               #opens and clears figure
 subplot(1,2,1); imshow(img); title("Original");axis("off")     #creates a side by side plot of orginal and new image
 subplot(1,2,2); imshow(image2); title("Image2"):axis("off")
+
+##PartB
+"""
+circular_rotation -- circulary moves red channel by a specified
+amount of pixels in an inputed image and returns the shifted image
+
+Requires PyPlot and function separate_var to be loaded!!!
+
+Args:
+   filename (str): string representing filename; ex: "selfie.png"
+   p (int): the number of pixels you want to shift the image
+
+Returns:
+   image (Array{Float32,3}): plot of the shifted image side by side
+   with original
+"""
+function circular_rotation(filename, p)
+    image = imread(filename)
+    imageshift = copy(image)
+    red = separate_var(imageshift)[1]
+    red1 = copy(red)
+    red[1:p, :] = red1[end-p+1:end, :]
+    red[end-p+1:end, :] = red1[1:p, :]
+    imageshift[:,:, 1] = red
+    figure(2); clf();                                               #opens and clears figure
+    subplot(2,2,1); imshow(image); title("Original");axis("off")     #creates a side by side plot of orginal and new image
+    subplot(2,2,2); imshow(imageshift); title("Image2"):axis("off")
+end
